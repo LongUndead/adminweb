@@ -59,7 +59,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const res = await axios.get('https://movie-explorer-be.onrender.com/api/admin/settings');
+        const res = await axios.get('http://192.168.1.7:3000/api/admin/settings');
         const dbData = Array.isArray(res.data) ? res.data[0] : (res.data?.data || res.data);
 
         if (dbData && Object.keys(dbData).length > 0) {
@@ -129,7 +129,7 @@ const Settings = () => {
         isMaintenanceMode: config.isMaintenanceMode ? 1 : 0 
       };
 
-      await axios.put('https://movie-explorer-be.onrender.com/api/admin/settings', payloadToSave);
+      await axios.put('http://192.168.1.7:3000/api/admin/settings', payloadToSave);
       Toast.fire({ icon: 'success', title: 'Đã lưu cấu hình hệ thống!' });
     } catch (error) {
       Swal.fire('Lỗi hệ thống', 'Không thể lưu cấu hình vào Database!', 'error');

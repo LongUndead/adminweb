@@ -43,7 +43,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCinemas = async () => {
       try {
-        const response = await axios.get('https://movie-explorer-be.onrender.com/api/cinemas');
+        const response = await axios.get('http://192.168.1.7:3000/api/cinemas');
         setCinemas(response.data);
       } catch (error) {}
     };
@@ -54,7 +54,7 @@ const Dashboard = () => {
     const fetchStats = async () => {
       try {
         const dateQuery = filterMode === 'ALL_TIME' ? '' : selectedDate;
-        const response = await axios.get(`https://movie-explorer-be.onrender.com/api/admin/dashboard/summary?cinemaId=${selectedCinema}&date=${dateQuery}`);
+        const response = await axios.get(`http://192.168.1.7:3000/api/admin/dashboard/summary?cinemaId=${selectedCinema}&date=${dateQuery}`);
         setStats(response.data);
       } catch (error) {
         console.error("Lỗi lấy dữ liệu thống kê:", error);
@@ -74,7 +74,7 @@ const Dashboard = () => {
     // 🚀 ĐÃ BỔ SUNG: Xử lý ảnh phim mới được thêm bằng Admin (Nằm trong thư mục uploads)
     if (path.startsWith('/uploads/') || path.startsWith('uploads/')) {
       const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-      return `https://movie-explorer-be.onrender.com/${cleanPath}`;
+      return `http://192.168.1.7:3000/${cleanPath}`;
     }
 
     // Nếu không thuộc 2 trường hợp trên -> Nó là ảnh gốc từ TMDB
@@ -100,10 +100,10 @@ const Dashboard = () => {
       // Phân loại thư mục y như cây folder backend của ông
       if (/^\d+/.test(filename)) {
         // Nếu tên file bắt đầu bằng số (timestamp: 1781875...) -> Nằm ở public/uploads/
-        return `https://movie-explorer-be.onrender.com/public/uploads/${filename}`;
+        return `http://192.168.1.7:3000/public/uploads/${filename}`;
       } else {
         // Còn lại (VD: food-178...jpg) -> Nằm ở public/foods/
-        return `https://movie-explorer-be.onrender.com/public/foods/${filename}`;
+        return `http://192.168.1.7:3000/public/foods/${filename}`;
       }
     }
 
@@ -112,10 +112,10 @@ const Dashboard = () => {
     const folder = folders[brandId] || 'cgv';
     
     if (img.startsWith('/')) img = img.substring(1);
-    if (img.startsWith('assets/')) return `https://movie-explorer-be.onrender.com/${img}`; 
-    if (img.startsWith(`${folder}/`)) return `https://movie-explorer-be.onrender.com/assets/${img}`;
+    if (img.startsWith('assets/')) return `http://192.168.1.7:3000/${img}`; 
+    if (img.startsWith(`${folder}/`)) return `http://192.168.1.7:3000/assets/${img}`;
     
-    return `https://movie-explorer-be.onrender.com/assets/${folder}/${img}`;
+    return `http://192.168.1.7:3000/assets/${folder}/${img}`;
   };
 
   const openNoteModal = (showtimeId: string) => {

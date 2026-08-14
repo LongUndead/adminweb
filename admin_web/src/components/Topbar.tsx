@@ -47,7 +47,7 @@ const Topbar = () => {
   // Hàm gọi API lấy danh sách thông báo
   const fetchNotifications = async () => {
     try {
-      const res = await axios.get('https://movie-explorer-be.onrender.com/api/admin/notifications');
+      const res = await axios.get('http://192.168.1.7:3000/api/admin/notifications');
       setNotifications(res.data);
     } catch (error) {
       console.error("Lỗi lấy thông báo:", error);
@@ -61,7 +61,7 @@ const Topbar = () => {
     // Nếu chưa đọc thì gọi API đánh dấu đã đọc
     if (notif.IsRead === 0) {
       try {
-        await axios.put(`https://movie-explorer-be.onrender.com/api/admin/notifications/${notif.NotificationID}/read`);
+        await axios.put(`http://192.168.1.7:3000/api/admin/notifications/${notif.NotificationID}/read`);
         fetchNotifications(); // Cập nhật lại số lượng chuông đỏ
       } catch (e) {
         console.error(e);
@@ -77,7 +77,7 @@ const Topbar = () => {
   // Đánh dấu đọc tất cả
   const handleReadAll = async () => {
     try {
-        await axios.put(`https://movie-explorer-be.onrender.com/api/admin/notifications/read-all`);
+        await axios.put(`http://192.168.1.7:3000/api/admin/notifications/read-all`);
         fetchNotifications();
     } catch (e) {
         console.error(e);

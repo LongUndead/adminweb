@@ -18,7 +18,7 @@ import Support from './pages/Support';
 
 // 🚀 IMPORT TRANG BÁO CÁO DOANH THU MỚI TẠO
 import RevenueReport from './pages/RevenueReport';
-//hay
+
 // =========================================================================
 // 1. BỨC TƯỜNG LỬA BẢO VỆ (Sử dụng Outlet để chuyển hướng an toàn)
 // =========================================================================

@@ -50,7 +50,7 @@ const RevenueReport = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.get(`https://movie-explorer-be.onrender.com/api/admin/reports/revenue?startDate=${startDate}&endDate=${endDate}`);
+      const response = await axios.get(`http://192.168.1.7:3000/api/admin/reports/revenue?startDate=${startDate}&endDate=${endDate}`);
       setReportData(response.data);
       Swal.fire({ icon: 'success', title: 'Lập báo cáo thành công', toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 });
     } catch (error) {

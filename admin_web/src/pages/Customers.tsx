@@ -39,7 +39,7 @@ const Customers = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://movie-explorer-be.onrender.com/api/admin/users');
+      const response = await axios.get('http://192.168.1.7:3000/api/admin/users');
       setUsers(response.data);
     } catch (error) { 
       Toast.fire({ icon: 'error', title: 'Lỗi tải dữ liệu người dùng' });
@@ -68,7 +68,7 @@ const Customers = () => {
     if (!avatarPath || String(avatarPath).trim() === '' || String(avatarPath) === 'null') return null;
     const path = String(avatarPath);
     if (path.startsWith('http')) return path;
-    return `https://movie-explorer-be.onrender.com${path.startsWith('/') ? '' : '/'}${path}`;
+    return `http://192.168.1.7:3000${path.startsWith('/') ? '' : '/'}${path}`;
   };
 
   const handleChangeRole = async (userId: number, roleId: number, name: string) => {
@@ -86,7 +86,7 @@ const Customers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.put(`https://movie-explorer-be.onrender.com/api/admin/users/${userId}/change-role`, { roleId });
+          await axios.put(`http://192.168.1.7:3000/api/admin/users/${userId}/change-role`, { roleId });
           Toast.fire({ icon: 'success', title: 'Cập nhật quyền thành công!' });
           fetchUsers();
         } catch (error) {
@@ -99,7 +99,7 @@ const Customers = () => {
   const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://movie-explorer-be.onrender.com/api/admin/users/admin', formData);
+      const res = await axios.post('http://192.168.1.7:3000/api/admin/users/admin', formData);
       Swal.fire({
         title: 'Thành công!',
         text: res.data.message,
@@ -127,7 +127,7 @@ const Customers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axios.put(`https://movie-explorer-be.onrender.com/api/admin/users/${id}/apply-blacklist`);
+          const res = await axios.put(`http://192.168.1.7:3000/api/admin/users/${id}/apply-blacklist`);
           Toast.fire({ icon: 'success', title: res.data.message });
           fetchUsers(); 
         } catch (error: any) { 
@@ -150,7 +150,7 @@ const Customers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.put(`https://movie-explorer-be.onrender.com/api/admin/users/${id}/unlock`);
+          await axios.put(`http://192.168.1.7:3000/api/admin/users/${id}/unlock`);
           Toast.fire({ icon: 'success', title: `Đã khôi phục tài khoản ${name}!` });
           fetchUsers();
         } catch (error) { 
@@ -173,7 +173,7 @@ const Customers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`https://movie-explorer-be.onrender.com/api/admin/users/${id}`);
+          await axios.delete(`http://192.168.1.7:3000/api/admin/users/${id}`);
           Swal.fire('Đã xóa!', 'Tài khoản đã bị loại bỏ khỏi hệ thống.', 'success');
           fetchUsers();
         } catch (error: any) { 

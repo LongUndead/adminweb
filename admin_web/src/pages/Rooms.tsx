@@ -32,8 +32,8 @@ interface LayoutRow { rowLetter: string; seats: Seat[]; centerZone?: any; }
 interface Room { RoomID: number; CinemaID: number; CinemaName: string; Name: string; TotalSeats: number; BufferMinutes: number; LayoutData?: string | null; }
 
 export default function Rooms() {
-  const API_URL = 'https://movie-explorer-be.onrender.com/api/admin'; 
-  const PUBLIC_API_URL = 'https://movie-explorer-be.onrender.com/api'; 
+  const API_URL = 'http://192.168.1.7:3000/api/admin'; 
+  const PUBLIC_API_URL = 'http://192.168.1.7:3000/api'; 
 
   const [activeTab, setActiveTab] = useState<'cinemas' | 'movies' | 'seattypes' | 'genres' | 'actors' | 'ticketprices'>('cinemas');
 
@@ -1035,7 +1035,7 @@ export default function Rooms() {
     }
 
     if (cleanPath.startsWith('http')) return cleanPath; 
-    if (cleanPath.startsWith('/uploads')) return `https://movie-explorer-be.onrender.com${cleanPath}`; 
+    if (cleanPath.startsWith('/uploads')) return `http://192.168.1.7:3000${cleanPath}`; 
     
     const tmdbPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
     return isBackdrop ? `https://image.tmdb.org/t/p/w1280${tmdbPath}` : `https://image.tmdb.org/t/p/w500${tmdbPath}`; 
@@ -1240,7 +1240,7 @@ export default function Rooms() {
                                 if (path.startsWith('http')) {
                                   imgUrl = path; // Link web ngoài
                                 } else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) {
-                                  imgUrl = `https://movie-explorer-be.onrender.com${path}`; // Ảnh tải lên từ máy tính
+                                  imgUrl = `http://192.168.1.7:3000${path}`; // Ảnh tải lên từ máy tính
                                 } else {
                                   imgUrl = `https://image.tmdb.org/t/p/w200${path.startsWith('/') ? path : '/' + path}`; // Ảnh gốc TMDB
                                 }
@@ -1316,7 +1316,7 @@ export default function Rooms() {
                       if (!cleanImg.startsWith('http') && !cleanImg.startsWith('/uploads')) {
                          finalUrl = `https://image.tmdb.org/t/p/w500${cleanImg.startsWith('/') ? cleanImg : '/' + cleanImg}`;
                       } else if (cleanImg.startsWith('/uploads')) {
-                         finalUrl = `https://movie-explorer-be.onrender.com${cleanImg}`;
+                         finalUrl = `http://192.168.1.7:3000${cleanImg}`;
                       }
 
                       return (
@@ -1987,7 +1987,7 @@ export default function Rooms() {
                                   if (path && String(path) !== 'null' && path.trim() !== '') {
                                     if (path.startsWith('http')) return path;
                                     if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) {
-                                      return `https://movie-explorer-be.onrender.com${path}`;
+                                      return `http://192.168.1.7:3000${path}`;
                                     }
                                     return `https://image.tmdb.org/t/p/w200${path.startsWith('/') ? path : '/' + path}`;
                                   }
@@ -2037,7 +2037,7 @@ export default function Rooms() {
                                 if (path.startsWith('http')) {
                                   imgUrl = path; // Link ngoài (Web khác)
                                 } else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) {
-                                  imgUrl = `https://movie-explorer-be.onrender.com${path}`; // Link local tải lên máy chủ
+                                  imgUrl = `http://192.168.1.7:3000${path}`; // Link local tải lên máy chủ
                                 } else {
                                   imgUrl = `https://image.tmdb.org/t/p/w200${path.startsWith('/') ? path : '/' + path}`; // Link TMDB
                                 }
@@ -2118,7 +2118,7 @@ export default function Rooms() {
                         if (c.profile_path && String(c.profile_path) !== 'null' && c.profile_path.trim() !== '') {
                           let path = c.profile_path.trim();
                           if (path.startsWith('http')) castImg = path;
-                          else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) castImg = `https://movie-explorer-be.onrender.com${path}`;
+                          else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) castImg = `http://192.168.1.7:3000${path}`;
                           else castImg = `https://image.tmdb.org/t/p/w200${path.startsWith('/') ? path : '/' + path}`;
                         } else {
                           castImg = `https://ui-avatars.com/api/?name=${encodeURIComponent(c.name)}&background=e2e8f0&color=475569`;
@@ -2368,7 +2368,7 @@ export default function Rooms() {
                 if (viewingActor.Avatar && String(viewingActor.Avatar) !== 'null' && viewingActor.Avatar.trim() !== '') {
                   let path = viewingActor.Avatar.trim();
                   if (path.startsWith('http')) imgUrl = path; 
-                  else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) imgUrl = `https://movie-explorer-be.onrender.com${path}`; 
+                  else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) imgUrl = `http://192.168.1.7:3000${path}`; 
                   else imgUrl = `https://image.tmdb.org/t/p/w300${path.startsWith('/') ? path : '/' + path}`; 
                 } else { imgUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(viewingActor.Name)}&background=e2e8f0&color=475569&size=200`; }
                 return <img src={imgUrl} alt="actor" className="w-40 h-40 object-cover rounded-full shadow-2xl border-4 border-white bg-slate-100" onError={(e) => { if (!e.currentTarget.src.includes('ui-avatars')) e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(viewingActor.Name)}&background=e2e8f0&color=475569&size=200`; }}/>
@@ -2545,7 +2545,7 @@ export default function Rooms() {
                 if (path.startsWith('http')) {
                   imgUrl = path; 
                 } else if (path.startsWith('/public') || path.startsWith('/avatars') || path.startsWith('/uploads')) {
-                  imgUrl = `https://movie-explorer-be.onrender.com${path}`; 
+                  imgUrl = `http://192.168.1.7:3000${path}`; 
                 } else {
                   imgUrl = `https://image.tmdb.org/t/p/w200${path.startsWith('/') ? path : '/' + path}`; 
                 }
